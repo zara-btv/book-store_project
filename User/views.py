@@ -3,8 +3,10 @@ from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.permissions import AllowAny
+from rest_framework import generics
 
-from User.permissions import HasBluePermission
+from User.models import CustomUser
+# from User.permissions import HasBluePermission
 from User.serializer import RegisterUserSerializer
 
 
@@ -23,7 +25,7 @@ class RegisterUserView(APIView):
         return Response({"result":{"user_id":user.id}},status=status.HTTP_200_OK)
 
 
-class myview(APIView):
-    permission_classes = [HasBluePermission]
-    def get(self, request):
-        return Response({"result":"you have a permission to access this part !"},status=status.HTTP_200_OK)
+class Users(generics.ListCreateAPIView):
+    permission_classes = [AllowAny]
+    serializer_class = RegisterUserSerializer
+    queryset = CustomUser.objects.all()

@@ -7,5 +7,5 @@ from rest_framework.views import APIView
 class Index(APIView):
     permission_classes = [IsAuthenticated,HasBluePermission]
     def get(self, request):
-        return HttpResponse("Hello, world. You're at the polls index.")
+        return HttpResponse("Hello, world. You're at the right track!")
 # Create your views here.
