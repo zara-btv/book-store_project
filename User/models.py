@@ -29,3 +29,10 @@ class CustomPermission(models.Model):
             ("Yellow", "Can vote in elections"),
             ("Red", "Can drink alcohol"),
         )
+
+class AllowedIP(models.Model):
+    ip_address = models.GenericIPAddressField(unique=True)
+    description = models.CharField(max_length=255, blank=True)
+
+    def __str__(self):
+        return self.ip_address

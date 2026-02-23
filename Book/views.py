@@ -10,6 +10,7 @@ from Book.serializer import AccessBookSerializer
 from django.db.models import Sum,Count,Avg
 from rest_framework.parsers import MultiPartParser, FormParser
 from rest_framework.decorators import parser_classes
+from Book.pagination import LargeResultsSetPagination
 
 # import models
 
@@ -31,6 +32,7 @@ class AccessBook(generics.ListCreateAPIView):
 
 class PublishedBooks(generics.ListAPIView):
     permission_classes = [AllowAny]
+    pagination_class = LargeResultsSetPagination
     serializer_class = AccessBookSerializer
     queryset = ListOfBooks.objects.filter(is_published=True)
 
